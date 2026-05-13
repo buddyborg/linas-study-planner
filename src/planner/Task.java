@@ -1,3 +1,7 @@
+package planner;
+
+import java.time.LocalDate;
+
 /**
  * TODO
  * 
@@ -6,11 +10,11 @@
 public class Task {
 
     private String title;
-    private String dueDate;
-    private String priority;
+    private LocalDate dueDate;
+    private Priority priority;
     private boolean completed;
 
-    public Task(String title, String dueDate, String priority, boolean completed) {
+    public Task(String title, LocalDate dueDate, Priority priority, boolean completed) {
         this.title = title;
         this.dueDate = dueDate;
         this.priority = priority;
@@ -21,11 +25,11 @@ public class Task {
         return title;
     }
 
-    public String getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public String getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
@@ -37,9 +41,24 @@ public class Task {
         completed = true;
     }
 
+    public void markIncomplete() {
+        completed = false;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
     @Override
     public String toString() {
-        return "Task [title=" + title + ", dueDate=" + dueDate + ", priority=" + priority + ", completed=" + completed
-                + "]";
+        return title + " - Due Date: " + dueDate + " Priority: " + priority + " Completed?: " + completed;
     }
 }

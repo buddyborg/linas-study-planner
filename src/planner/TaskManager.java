@@ -1,4 +1,7 @@
+package planner;
+
 import java.util.ArrayList;
+import java.time.LocalDate;
 /**
  * TODO
  * 
@@ -8,16 +11,16 @@ public class TaskManager {
 
     private ArrayList<Task> tasks;
 
-    public TaskManager(ArrayList<Task> tasks){
-        this.tasks = tasks;
+    public TaskManager(){ //TaskManager creates its own empty list 
+        tasks = new ArrayList<>();
     }
 
     public void addTask(Task task){
-        //TODO
+        tasks.add(task);
     }
 
     public void removeTask(int index){
-        //TODO
+        tasks.remove(index);
     }
 
     public ArrayList<Task> getTasks() {
@@ -25,7 +28,29 @@ public class TaskManager {
     }
 
     public void markComplete(int index) {
-        //TODO
+        tasks.get(index).markComplete();
     }
 
+    public void markIncomplete(int index){
+        tasks.get(index).markIncomplete();
+    }
+
+    public void editTaskTitle(int index, String newTitle) {
+        tasks.get(index).setTitle(newTitle);
+    }
+
+    public void editTaskDueDate(int index, LocalDate newDueDate) {
+        tasks.get(index).setDueDate(newDueDate);
+    }
+
+    public void editTaskPriority(int index, Priority newPriority) {
+        tasks.get(index).setPriority(newPriority);
+    }
+
+    @Override
+    public String toString() { //needed to print whole task list easily 
+        return "Tasks: " + tasks;
+    }
+
+    
 }
