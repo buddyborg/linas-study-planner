@@ -3,7 +3,8 @@ package planner;
 import java.time.LocalDate;
 
 /**
- * TODO
+ * Represents one task or assignment in the planner.
+ * Stores the task title, due date, priority, and completion status. 
  * 
  * @author  Lina
  */
