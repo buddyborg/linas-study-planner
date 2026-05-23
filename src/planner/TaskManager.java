@@ -21,6 +21,12 @@ public class TaskManager {
         tasks.add(task);
     }
 
+    public void addTasks(ArrayList<Task> tasksToAdd) {
+        for (Task task: tasksToAdd){
+            addTask(task);
+        }
+    }
+
     public void removeTask(int index){
         tasks.remove(index);
     }

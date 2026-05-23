@@ -1,18 +1,19 @@
 package planner;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
- * Temporary test app for testing TaskManager methods. 
- * 
+ * Temporary test app for testing TaskManager methods.
+ *
  * @author  Lina
  */
 public class StudyPlannerApp {
-    
+
     private TaskManager manager;
     private FileHandler fileHandler;
     public static void main(String[] args) {
-        
+
         TaskManager manager = new TaskManager();
 
         Task mathTask = new Task("Math Quiz", LocalDate.of(2026, 5, 13), Priority.HIGH, false);
@@ -57,6 +58,7 @@ public class StudyPlannerApp {
         System.out.println("Search bio: " + manager.searchTasksByTitle("bio"));
         System.out.println();
 
+        FileHandler fileHandler = new FileHandler("tasks.txt");
         System.out.println("Before sorting by due date:");
         System.out.println(manager);
 
@@ -85,6 +87,16 @@ public class StudyPlannerApp {
         System.out.println();
         System.out.println("After sorting by completion:");
         System.out.println(manager);
+
+        fileHandler.saveTasks(manager.getTasks());
+
+
+        fileHandler.saveTasks(manager.getTasks()); //action: writes tasks into tasks.txt
+        ArrayList<Task> loadedTasks = fileHandler.loadTasks(); //question: gives back tasks from tasks.txt
+
+        System.out.println();
+        System.out.println("Loaded tasks:");
+        System.out.println(loadedTasks);
 
 
     }
