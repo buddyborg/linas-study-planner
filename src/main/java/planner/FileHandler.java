@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * TODO
- * 
- * @author  Lina
+ * Handles saving and loading planner tasks from a text file.
+ * Converts Task objects to file lines and rebuilds Task objects when loading.
+ *
+ * @author Lina
  */
 public class FileHandler {
 
