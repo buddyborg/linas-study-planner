@@ -66,10 +66,30 @@ public class StudyPlannerApp extends Application {
         Button addTaskBtn = new Button("Add New Task");
         addTaskBtn.setOnAction(event -> showAddTaskWindow());
 
+        Button deleteTaskBtn = new Button("Remove Selected Task");
+        deleteTaskBtn.setOnAction(event -> {
+            int selectedIndex = taskListView.getSelectionModel().getSelectedIndex(); //asks list which row is currently selected
+
+            if (selectedIndex == -1){ //if no row selected, JavaFX returns -1
+                Alert removeTaskAlert = new Alert(Alert.AlertType.ERROR);
+
+                removeTaskAlert.setTitle("Missing Task Selection");
+                removeTaskAlert.setHeaderText("Could not remove task");
+                removeTaskAlert.setContentText("Please select a task to remove.");
+                removeTaskAlert.showAndWait();
+
+                return; //stops the button action because no task was selected
+            }
+
+            manager.removeTask(selectedIndex);
+            refreshTaskList(); //visually shows the change
+            fileHandler.saveTasks(manager.getTasks()); //save so if user closes and then reopens deleted task stays deleted
+        });
+
         refreshTaskList();
 
         VBox vbox = new VBox(); //vbox = layout pane that arranges its child nodes in vertical column from top to bottom
-        vbox.getChildren().addAll(titleLabel, taskListView, backBtn, addTaskBtn);
+        vbox.getChildren().addAll(titleLabel, taskListView, backBtn, addTaskBtn, deleteTaskBtn);
 
         Scene scene = new Scene(vbox, 500, 400);
 
@@ -119,12 +139,12 @@ public class StudyPlannerApp extends Application {
             }
 
             if (!errorMessage.isEmpty())  {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
+                Alert taskAlert = new Alert(Alert.AlertType.ERROR);
 
-                alert.setTitle("Missing Task Information");
-                alert.setHeaderText("Could not add task");
-                alert.setContentText(errorMessage);
-                alert.showAndWait();
+                taskAlert.setTitle("Missing Task Information");
+                taskAlert.setHeaderText("Could not add task");
+                taskAlert.setContentText(errorMessage);
+                taskAlert.showAndWait();
 
                 return; // Stops the button action so the bad task does not get created or saved
             }
